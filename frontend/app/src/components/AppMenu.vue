@@ -21,8 +21,8 @@ export default {
 </script>
 
 <template>
-  <div class="container">
-    <div class="card">
+  <div class="container1">
+    <div class="card1">
       <div class="face face1">
         <div class="content">
           <img
@@ -33,15 +33,11 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum
-            cumque minus iste veritatis provident at.
-          </p>
-          <a href="#">Read More</a>
+          <RouterLink to="#">Перейти</RouterLink>
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card1">
       <div class="face face1">
         <div class="content">
           <img
@@ -52,15 +48,11 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum
-            cumque minus iste veritatis provident at.
-          </p>
-          <a href="#">Read More</a>
+          <RouterLink to="#">Перейти</RouterLink>
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card1">
       <div class="face face1">
         <div class="content">
           <img
@@ -71,15 +63,11 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum
-            cumque minus iste veritatis provident at.
-          </p>
-          <a href="#">Read More</a>
+          <RouterLink to="#">Перейти</RouterLink>
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card1">
       <div class="face face1">
         <div class="content">
           <img
@@ -90,11 +78,7 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cum
-            cumque minus iste veritatis provident at.
-          </p>
-          <a href="#">Read More</a>
+          <RouterLink to="#">Перейти</RouterLink>
         </div>
       </div>
     </div>
@@ -113,7 +97,7 @@ body{
   font-family: consolas;
 }
 
-.container{
+.container1{
   width: 100%;
   position: relative;
   display: flex;
@@ -121,18 +105,18 @@ body{
   gap: 25px;
 }
 
-.container .card{
+.container1 .card1{
   position: relative;
   cursor: pointer;
 }
 
-.container .card .face{
+.container1 .card1 .face{
   width: 300px;
   height: 200px;
   transition: 0.5s;
 }
 
-.container .card .face.face1{
+.container1 .card1 .face.face1{
   position: relative;
   background: #333;
   display: flex;
@@ -142,25 +126,30 @@ body{
   transform: translateY(100px);
 }
 
-.container .card:hover .face.face1{
-  background: #ff0057;
+.container1 .card1:hover .face.face1{
+  background: #E9190F;
   transform: translateY(0);
+  /* #ff0057 */
 }
 
-.container .card .face.face1 .content{
+.container1 .card1 .face.face1 .content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   opacity: 0.6;
   transition: 0.5s;
 }
 
-.container .card:hover .face.face1 .content{
+.container1 .card1:hover .face.face1 .content{
   opacity: 1;
 }
 
-.container .card .face.face1 .content img{
+.container1 .card1 .face.face1 .content img{
   max-width: 100px;
 }
 
-.container .card .face.face1 .content h3{
+.container1 .card1 .face.face1 .content h3{
   margin: 10px 0 0;
   padding: 0;
   color: #fff;
@@ -168,7 +157,7 @@ body{
   font-size: 1.5em;
 }
 
-.container .card .face.face2{
+.container1 .card1 .face.face2{
   position: relative;
   background: #fff;
   display: flex;
@@ -180,16 +169,16 @@ body{
   transform: translateY(-100px);
 }
 
-.container .card:hover .face.face2{
+.container1 .card1:hover .face.face2{
   transform: translateY(0);
 }
 
-.container .card .face.face2 .content p{
+.container1 .card1 .face.face2 .content p{
   margin: 0;
   padding: 0;
 }
 
-.container .card .face.face2 .content a{
+.container1 .card1 .face.face2 .content a{
   margin: 15px 0 0;
   display:  inline-block;
   text-decoration: none;
@@ -199,7 +188,7 @@ body{
   border: 1px solid #333;
 }
 
-.container .card .face.face2 .content a:hover{
+.container1 .card1 .face.face2 .content a:hover{
   background: #333;
   color: #fff;
 }

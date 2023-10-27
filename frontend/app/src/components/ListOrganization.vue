@@ -18,7 +18,11 @@ export default {
 </script>
 
 <template>
-    
+    <div class="wrapper">
+        <div class="create-organization">
+            <RouterLink to="#">Создать</RouterLink>
+        </div>
+    </div>
 </template>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500&display=swap');
@@ -32,5 +36,7 @@ export default {
     color: #fff;
 }
 
-
+a {
+    text-decoration: none;
+}
 </style>

@@ -68,14 +68,6 @@ export default {
                       </div>
                   </form>
               </div>
-              <div class="author">
-                <div class="text">
-                    <span class="one">by</span> <span class="two">CodeRed</span> Team
-                </div>
-                <div class="img">
-                    <img src="../assets/codered.png" class="codered" alt="codered-png">
-                </div>
-              </div>
           </div>
       </div>
   </div>

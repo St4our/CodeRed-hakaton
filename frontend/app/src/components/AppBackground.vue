@@ -30,7 +30,6 @@ onBeforeUnmount(()=>{
 </script>
 <template>
     <div class="vanta_area" ref="Area"></div>
-
 </template>
 <style lang="less" scoped>
 .vanta_area {
