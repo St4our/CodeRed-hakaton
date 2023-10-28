@@ -14,7 +14,7 @@ export default {
 
 <template>
   <div class="wrapper">
-    <h1>Список организаций</h1>
+    <h1>Список пользователей</h1>
     <div class="scroll-table">
       <table>
         <thead>

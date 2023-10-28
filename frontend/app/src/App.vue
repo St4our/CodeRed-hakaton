@@ -20,11 +20,14 @@ export default {
 
 <template>
   <div class="container1">
-    <RouterLink to="/" class="author">
+    <div class="author">
       <span class="one">by</span> <span class="two">CodeRed</span> Team
-    </RouterLink>
+    </div>
     <div class="img">
-      <img src="./assets/codered.png" class="codered" alt="codered-png" />
+      <RouterLink to="/">
+        <img src="./assets/codered.png" class="codered" alt="codered-png" />
+      </RouterLink>
+      <img src="./assets/profile.png" class="profile" alt="profile.png">
     </div>
     <app-background class="bg"></app-background>
     <router-view class="register"></router-view>
@@ -69,14 +72,26 @@ export default {
 }
 
 .img {
+  width: 100%;
   position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   top: 0;
   left: 0;
   padding-left: 35px;
   padding-top: 20px;
+  padding-right: 35px;
+  cursor: pointer;
+  z-index: 2;
 }
 .codered {
   height: 110px;
+  width: auto;
+}
+
+.profile {
+  height: 65px;
   width: auto;
 }
 

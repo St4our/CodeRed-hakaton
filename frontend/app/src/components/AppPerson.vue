@@ -13,6 +13,7 @@ export default {};
           <th scope="col"></th>
           <th scope="col">Название</th>
           <th scope="col">Удаление</th>
+          <th scope="col">Переход</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,11 @@ export default {};
             <button type="button" class="btn btn-outline-danger">
               Удалить
             </button>
+          </td>
+          <td>
+            <RouterLink to="#" class="btn btn-outline-light transition"
+              >Перейти</RouterLink
+            >
           </td>
         </tr>
       </tbody>

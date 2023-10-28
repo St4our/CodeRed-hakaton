@@ -14,13 +14,13 @@ export default {
 
 <template>
   <div class="wrapper">
-    <h1>Список организаций</h1>
+    <h1>Список администраторов</h1>
     <div class="scroll-table">
       <table>
         <thead>
           <tr class="list-nav">
             <th>Индекс</th>
-            <th>Название</th>
+            <th>Логин</th>
             <th>Удаление</th>
             <th>Переход</th>
           </tr>
