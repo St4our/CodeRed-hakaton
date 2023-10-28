@@ -1,7 +1,6 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import axios from "axios";
-
 export default {
   components: {},
   data() {
@@ -15,10 +14,10 @@ export default {
 <template>
   <div class="wrapper">
     <h1>Категории пользователей</h1>
-    <div class="scroll-table">
-      <table>
+    <div class="scroll-table glass">
+      <table class="table table-dark">
         <thead>
-          <tr class="list-nav">
+          <tr class="">
             <th>Индекс</th>
             <th>Название</th>
             <th>Удаление</th>
@@ -26,179 +25,11 @@ export default {
           </tr>
         </thead>
       </table>
-      <div class="scroll-table-body">
-        <table>
-          <tbody>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
+      <div class="scroll-table-body glass">
+        <table class="table table-dark table-hover">
+          <tbody class="scroll-table-body glass" >
+            <tr v-for="(item, index) in 10">
+              <td>{{index}}</td>
               <td>Codered</td>
               <td>
                 <button type="button" class="btn btn-outline-danger">
@@ -222,7 +53,6 @@ export default {
 </template>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500&display=swap");
-
 *,
 *:before,
 *:after {
@@ -230,14 +60,21 @@ export default {
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
-
 a {
   text-decoration: none;
 }
-
 tbody a {
   color: #fff;
 }
+.glass {
+    background: rgb(93 93 93 / 6%) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(9, 9, 9, 0.3) !important;
+  }
+
 
 .wrapper {
   width: 100%;
@@ -246,34 +83,27 @@ tbody a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 35px;
 }
-
 .btn-outline-danger,
 .btn-outline-success,
 .btn-outline-light {
   padding: 5px 7px;
 }
-
 .create {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-h1 {
-  position: absolute;
-  top: 10%;
-}
-
 .scroll-table-body {
   height: 500px;
   overflow-x: auto;
   margin-top: 0px;
   margin-bottom: 20px;
-  border: 1px solid #fff;
-  border-top: none;
+  background: #32353956;
+
 }
 .scroll-table table {
   width: 100%;
@@ -293,7 +123,6 @@ h1 {
   font-size: 14px;
   vertical-align: top;
 }
-
 /* Стили для скролла */
 ::-webkit-scrollbar {
   width: 6px;
@@ -304,30 +133,26 @@ h1 {
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
-
 .list-item {
-  border: 1px solid #fff;
+  
+
+
+
   transition: background-color 300ms;
 }
 
-.list-item:hover {
-  background-color: #2D2D34;
-  /* #06070e */
-}
-
 .list-nav {
-  border: 1px solid #fff;
-}
+  
 
+
+}
 @media (max-width: 550px) {
   .scroll-table-body {
     height: 300px;
   }
-
   .wrapper {
     padding: 0 10px;
   }
-
   .btn-outline-danger,
   .btn-outline-success,
   .btn-outline-light {

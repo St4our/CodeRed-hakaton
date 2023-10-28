@@ -8,6 +8,8 @@ import CategoryUser from '../components/CategoryUser.vue'
 import AppTest from '../components/AppTest.vue'
 import TestCreate from '../create/TestCreate.vue'
 import AppMenu from '../components/AppMenu.vue'
+import AppPerson from '../components/AppPerson.vue'
+import AppChat from '../components/AppChat.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,6 +59,11 @@ const router = createRouter({
       path: '/menu/test/create',
       name: 'testcreate',
       component: TestCreate,
+    },
+    {
+      path: '/menu/chat',
+      name: 'chat',
+      component: AppChat,
     },
   ]
 })
