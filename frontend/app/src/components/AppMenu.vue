@@ -1,5 +1,5 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView } from 'vue-router';
 
 export default {
   data() {
@@ -25,9 +25,7 @@ export default {
     <div class="card1">
       <div class="face face1">
         <div class="content">
-          <img
-            src="../assets/user.png"
-          />
+          <img src="../assets/user.png" />
           <h3>Категории пользователей</h3>
         </div>
       </div>
@@ -40,9 +38,7 @@ export default {
     <div class="card1">
       <div class="face face1">
         <div class="content">
-          <img
-            src="../assets/test.png"
-          />
+          <img src="../assets/test.png" />
           <h3>Тесты</h3>
         </div>
       </div>
@@ -55,9 +51,7 @@ export default {
     <div class="card1">
       <div class="face face1">
         <div class="content">
-          <img
-            src="../assets/lessons.png"
-          />
+          <img src="../assets/lessons.png" />
           <h3>Уроки</h3>
         </div>
       </div>
@@ -70,9 +64,7 @@ export default {
     <div class="card1">
       <div class="face face1">
         <div class="content">
-          <img
-            src="../assets/chat.png"
-          />
+          <img src="../assets/chat.png" />
           <h3>Чат Поддержки</h3>
         </div>
       </div>
@@ -86,7 +78,8 @@ export default {
 </template>
 
 <style>
-body{
+
+body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -97,7 +90,7 @@ body{
   font-family: consolas;
 }
 
-.container1{
+.container1 {
   width: 100%;
   position: relative;
   display: flex;
@@ -105,18 +98,18 @@ body{
   gap: 25px;
 }
 
-.container1 .card1{
+.container1 .card1 {
   position: relative;
   cursor: pointer;
 }
 
-.container1 .card1 .face{
+.container1 .card1 .face {
   width: 300px;
   height: 200px;
   transition: 0.5s;
 }
 
-.container1 .card1 .face.face1{
+.container1 .card1 .face.face1 {
   position: relative;
   background: #333;
   display: flex;
@@ -126,13 +119,13 @@ body{
   transform: translateY(100px);
 }
 
-.container1 .card1:hover .face.face1{
-  background: #E9190F;
+.container1 .card1:hover .face.face1 {
+  background: #e9190f;
   transform: translateY(0);
   /* #ff0057 */
 }
 
-.container1 .card1 .face.face1 .content{
+.container1 .card1 .face.face1 .content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,15 +134,15 @@ body{
   transition: 0.5s;
 }
 
-.container1 .card1:hover .face.face1 .content{
+.container1 .card1:hover .face.face1 .content {
   opacity: 1;
 }
 
-.container1 .card1 .face.face1 .content img{
+.container1 .card1 .face.face1 .content img {
   max-width: 100px;
 }
 
-.container1 .card1 .face.face1 .content h3{
+.container1 .card1 .face.face1 .content h3 {
   margin: 10px 0 0;
   padding: 0;
   color: #fff;
@@ -157,7 +150,7 @@ body{
   font-size: 1.5em;
 }
 
-.container1 .card1 .face.face2{
+.container1 .card1 .face.face2 {
   position: relative;
   background: #fff;
   display: flex;
@@ -169,18 +162,18 @@ body{
   transform: translateY(-100px);
 }
 
-.container1 .card1:hover .face.face2{
+.container1 .card1:hover .face.face2 {
   transform: translateY(0);
 }
 
-.container1 .card1 .face.face2 .content p{
+.container1 .card1 .face.face2 .content p {
   margin: 0;
   padding: 0;
 }
 
-.container1 .card1 .face.face2 .content a{
+.container1 .card1 .face.face2 .content a {
   margin: 15px 0 0;
-  display:  inline-block;
+  display: inline-block;
   text-decoration: none;
   font-weight: 900;
   color: #333;
@@ -188,7 +181,7 @@ body{
   border: 1px solid #333;
 }
 
-.container1 .card1 .face.face2 .content a:hover{
+.container1 .card1 .face.face2 .content a:hover {
   background: #333;
   color: #fff;
 }
