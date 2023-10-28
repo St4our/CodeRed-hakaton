@@ -106,12 +106,17 @@ a {
     width: auto;
   }
 
+  .profile {
+    height: 50px;
+  }
+
   .img {
     position: absolute;
     top: 0;
     left: 0;
     padding-left: 10px;
     padding-top: 10px;
+    padding-right: 10px;
   }
 }
 </style>

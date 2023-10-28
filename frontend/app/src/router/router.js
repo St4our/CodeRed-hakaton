@@ -5,6 +5,8 @@ import ListOrganization from '../components/ListOrganization.vue'
 import ListAdmin from '../components/ListAdmin.vue'
 import ListUsers from '../components/ListUsers.vue'
 import CategoryUser from '../components/CategoryUser.vue'
+import AppTest from '../components/AppTest.vue'
+import TestCreate from '../create/TestCreate.vue'
 import AppMenu from '../components/AppMenu.vue'
 
 const router = createRouter({
@@ -21,12 +23,12 @@ const router = createRouter({
       component: AppLogin,
     },
     {
-      path: '/list/organization',
+      path: '/menu/list/organization',
       name: 'listorganization',
       component: ListOrganization,
     },
     {
-      path: '/list/admin',
+      path: '/menu/list/admin',
       name: 'listadmin',
       component: ListAdmin,
     },
@@ -45,6 +47,16 @@ const router = createRouter({
       name: 'menu',
       component: AppMenu,
       alias: "/"
+    },
+    {
+      path: '/menu/test',
+      name: 'test',
+      component: AppTest,
+    },
+    {
+      path: '/menu/test/create',
+      name: 'testcreate',
+      component: TestCreate,
     },
   ]
 })
