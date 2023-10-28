@@ -1,8 +1,8 @@
 <script>
-import { RouterLink, RouterView } from "vue-router";
-import AppBackground from "./components/AppBackground.vue";
-import AppRegister from "./components/AppRegister.vue";
-import AppLogin from "./components/AppLogin.vue";
+import { RouterLink, RouterView } from 'vue-router';
+import AppBackground from './components/AppBackground.vue';
+import AppRegister from './components/AppRegister.vue';
+import AppLogin from './components/AppLogin.vue';
 
 export default {
   components: {
@@ -27,7 +27,9 @@ export default {
       <RouterLink to="/">
         <img src="./assets/codered.png" class="codered" alt="codered-png" />
       </RouterLink>
-      <img src="./assets/profile.png" class="profile" alt="profile.png">
+      <RouterLink to="/profile">
+        <img src="./assets/profile.png" class="profile" alt="profile.png" />
+      </RouterLink>
     </div>
     <app-background class="bg"></app-background>
     <router-view class="register"></router-view>
@@ -35,6 +37,12 @@ export default {
 </template>
 
 <style scoped>
+.sub {
+  color: #9c9e9e !important;
+}
+.main-color {
+  color: #a71d31 !important;
+}
 .bg {
   height: 100vh;
 }

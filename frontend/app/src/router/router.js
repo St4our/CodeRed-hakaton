@@ -6,8 +6,9 @@ import ListAdmin from '../components/ListAdmin.vue'
 import ListUsers from '../components/ListUsers.vue'
 import CategoryUser from '../components/CategoryUser.vue'
 import AppMenu from '../components/AppMenu.vue'
-import AppPerson from '../components/AppPerson.vue'
+import AppProfile from '../components/AppProfile.vue'
 import AppChat from '../components/AppChat.vue'
+import AppTest from '../components/AppTest.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,6 +53,16 @@ const router = createRouter({
       path: '/chat',
       name: 'chat',
       component: AppChat,
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: AppTest,
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: AppProfile,
     },
   ]
 })
