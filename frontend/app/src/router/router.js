@@ -9,11 +9,18 @@ import AppTest from '../components/AppTest.vue'
 import TestCreate from '../create/TestCreate.vue'
 import AppMenu from '../components/AppMenu.vue'
 import AppPerson from '../components/AppPerson.vue'
+import AppMain from '../components/AppMain.vue'
 import AppChat from '../components/AppChat.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/',
+      name: 'main',
+      component: AppMain,
+      alias: "/"
+    },
     {
       path: '/registration',
       name: 'register',
@@ -48,7 +55,6 @@ const router = createRouter({
       path: '/menu',
       name: 'menu',
       component: AppMenu,
-      alias: "/"
     },
     {
       path: '/menu/test',

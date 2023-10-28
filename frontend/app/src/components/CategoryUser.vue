@@ -4,7 +4,10 @@ import axios from "axios";
 export default {
   components: {},
   data() {
-    return {};
+    return {
+        categories: ['Монтажник', 'Сварщик', 'Токарь', 'Фрезеровщик', 'Слесарь', 'Электрик', 'Сверловщик', 'Распиловщик', 'Комплектовщик', 'Оператор станка с ЧПУ', 'Качественный контролер',
+        'Грузчик', 'Маляр', 'Шлифовщик', 'Трубопроводчик']
+    };
   },
   methods: {},
   mounted() {},
@@ -19,23 +22,17 @@ export default {
         <thead>
           <tr class="">
             <th>Индекс</th>
-            <th>Название</th>
-            <th>Удаление</th>
+            <th>Категория</th>
             <th>Переход</th>
           </tr>
         </thead>
       </table>
       <div class="scroll-table-body glass">
-        <table class="table table-dark table-hover">
+        <table>
           <tbody class="scroll-table-body glass" >
-            <tr v-for="(item, index) in 10">
-              <td>{{index}}</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
+            <tr v-for="(item, index) in this.categories" class="list-item">
+              <td>{{index + 1}}</td>
+              <td>{{item}}</td>
               <td>
                 <RouterLink to="#" class="btn btn-outline-light transition"
                   >Перейти</RouterLink
@@ -67,10 +64,9 @@ tbody a {
   color: #fff;
 }
 .glass {
-    background: rgb(93 93 93 / 6%) !important;
     border-radius: 16px !important;
     box-shadow: 0 4px 30px rgb(0 0 0 / 10%) !important;
-    backdrop-filter: blur(5px) !important;
+    backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(5px) !important;
     border: 1px solid rgba(9, 9, 9, 0.3) !important;
   }
@@ -102,7 +98,6 @@ tbody a {
   overflow-x: auto;
   margin-top: 0px;
   margin-bottom: 20px;
-  background: #32353956;
 
 }
 .scroll-table table {
@@ -135,17 +130,13 @@ tbody a {
 }
 .list-item {
   
-
-
-
-  transition: background-color 300ms;
+  transition: background-color 500ms;
 }
 
-.list-nav {
-  
-
-
+.list-item:hover, .list-item:active {
+    background-color: #35393C;
 }
+
 @media (max-width: 550px) {
   .scroll-table-body {
     height: 300px;

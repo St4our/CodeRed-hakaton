@@ -82,12 +82,12 @@ export default {
   padding-left: 35px;
   padding-top: 20px;
   padding-right: 35px;
-  cursor: pointer;
-  z-index: 2;
 }
 .codered {
   height: 110px;
   width: auto;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .profile {
