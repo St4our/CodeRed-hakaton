@@ -14,7 +14,7 @@ export default {
 
 <template>
   <div class="wrapper">
-    <h1>Список организаций</h1>
+    <h1>Категории пользователей</h1>
     <div class="scroll-table">
       <table>
         <thead>
@@ -311,7 +311,8 @@ h1 {
 }
 
 .list-item:hover {
-  background-color: #06070e;
+  background-color: #2D2D34;
+  /* #06070e */
 }
 
 .list-nav {
