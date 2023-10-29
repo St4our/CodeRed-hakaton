@@ -8,7 +8,7 @@ export default {
       nexttarget: 0,
       backtarget: 0,
       testindex: 0,
-      info: []
+      info: [],
     };
   },
   methods: {
@@ -31,52 +31,80 @@ export default {
       let group = document.querySelector(`.group`);
       group.style.transform = `translateX(${this.testindex}%)`;
     },
-    async testload(){
+    async testload() {
       let response = await axios.get(`/tests`, {
-        params:{
-          test_id: this.$route.query.id
+        params: {
+          test_id: this.$route.query.id,
         },
         headers: {
           Authorization: document.cookie.replace(`token=`, ``),
         },
       });
-      
-      this.info = response.data.tests;
-    }
+
+      this.info = response.data.tests[0];
+    },
   },
   mounted() {
+    this.testload();
     this.start();
-    this.testload()
   },
 };
 </script>
 
 <template>
   <div class="container">
-    <h1>Тесты</h1>
+    <h1>{{ info.name }}</h1>
     <div class="overflow">
       <div class="group">
         <div
-          v-for="(item, index) in info"
+          v-for="(item, index) in info.questions"
           class="wrapper-test"
           :class="{ next: nexttarget == 1, back: backtarget == 1 }"
         >
           <div class="question">
-            <span>{{item.name}}</span>
+            <span>{{ item.name }}</span>
           </div>
           <div class="test-body">
-            <div class="form-check" v-for="(ans, i) in info.questions">
+            <div class="form-check">
               <input
                 class="form-check-input"
                 type="radio"
                 name="flexRadioDefault"
-                :id="'flexRadioDefault' + index + i"
+                :id="'flexRadioDefault' + index + 1"
               />
               <label
                 class="form-check-label"
-                :for="'flexRadioDefault' + index + i"
+                :for="'flexRadioDefault' + index + 1"
               >
-                {{ ans }}
+                {{ item.answer_1 }}
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                :id="'flexRadioDefault' + index + 2"
+              />
+              <label
+                class="form-check-label"
+                :for="'flexRadioDefault' + index + 2"
+              >
+                {{ item.answer_2 }}
+              </label>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="flexRadioDefault"
+                :id="'flexRadioDefault' + index + 3"
+              />
+              <label
+                class="form-check-label"
+                :for="'flexRadioDefault' + index + 3"
+              >
+                {{ item.answer_3 }}
               </label>
             </div>
           </div>
