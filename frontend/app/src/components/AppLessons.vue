@@ -13,9 +13,9 @@ export default {
 </script>
 <template>
   <div class="wrapper">
-    <h1>Тесты</h1>
+    <h1>Уроки</h1>
     <div class="wrapper-for-tests">
-      <RouterLink v-for="(item,index) in 10" :to="'/menu/tests/test?id='+index">
+      <RouterLink v-for="(item,index) in 10" :to="'/menu/lessons/lesson?id='+index">
         <div class="test">
           <h4 class="title">На сколько ты сварщик</h4>
           <div class="points">?/100</div>
@@ -23,7 +23,7 @@ export default {
       </RouterLink>
     </div>
     <div class="create">
-      <RouterLink class="btn btn-outline-success" to="/menu/test/create">Создать</RouterLink>
+      <RouterLink class="btn btn-outline-success" to="/menu/lesson/create">Создать</RouterLink>
     </div>
   </div>
 </template>

@@ -13,6 +13,8 @@ import AppMain from '../components/AppMain.vue';
 import AppChat from '../components/AppChat.vue';
 import AppTest from '../components/AppTest.vue';
 import AppLesson from '../components/AppLesson.vue';
+import AppLessons from '../components/AppLessons.vue';
+import LessonCreate from '../create/LessonCreate.vue';
 import AppPolicy from '../policy/AppPolicy.vue';
 
 const router = createRouter({
@@ -85,7 +87,7 @@ const router = createRouter({
       component: AppProfile,
     },
     {
-      path: '/menu/lesson',
+      path: '/menu/lessons/lesson',
       name: 'lesson',
       component: AppLesson,
     },
@@ -93,6 +95,16 @@ const router = createRouter({
       path: '/policy',
       name: 'policy',
       component: AppPolicy,
+    },
+    {
+      path: '/menu/lessons',
+      name: 'lessons',
+      component: AppLessons,
+    },
+    {
+      path: '/menu/lesson/create',
+      name: 'lesson-create',
+      component: LessonCreate,
     },
   ],
 });

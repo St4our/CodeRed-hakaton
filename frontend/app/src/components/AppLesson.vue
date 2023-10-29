@@ -18,8 +18,9 @@ export default {
         src="https://www.youtube.com/embed/xhFt8a4H098?si=NTue5cb6dJeXehX6"
         frameborder="0"
         width="1000px"
-        height="500px"
+        height="400px"
       ></iframe>
+      <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta consectetur, animi quibusdam ut at ratione quia placeat provident aut earum! Placeat quia, sequi labore ducimus soluta aliquam odit incidunt accusantium.</p>
     </div>
   </div>
 </template>
@@ -34,6 +35,8 @@ iframe{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 20px;
 }
 h1 {
   position: absolute;

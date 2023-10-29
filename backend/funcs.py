@@ -38,7 +38,7 @@ def delete_organization(connection: sqlite3.Connection, cursor: sqlite3.Cursor, 
     cursor.execute(f"DELETE FROM organizations where organization_id = {organization_id}"); connection.commit()
 
 def get_users(connection: sqlite3.Connection, cursor: sqlite3.Cursor, user_id: int) -> json:
-    cols = ["user_id", "sec_role_id", "category_id", "username", "date_of_birth"]
+    cols = ["user_id", "organization_id", "sec_role", "category_id", "username", "token", "name", "surname", "phone", "email"]
     if user_id: cursor.execute(f"SELECT {','.join(col for col in cols)} from users WHERE user_id = {user_id}")
     else: cursor.execute(f"SELECT {','.join(col for col in cols)} from users")
     users = cursor.fetchall()
@@ -50,11 +50,12 @@ def get_users(connection: sqlite3.Connection, cursor: sqlite3.Cursor, user_id: i
         users_data.append(user_info)
     return users_data
 
-def create_user(connection: sqlite3.Connection, cursor: sqlite3.Cursor, sec_role_id: int, category_id: int, username: str, token: str, date_of_birth: str) -> json:
+def create_user(connection: sqlite3.Connection, cursor: sqlite3.Cursor, sec_role: int, organization_id: int, category_id: int, username: str, token: str, name: str, surname: str, phone: str, email: str) -> json:
+    cols = ["user_id", "organization_id", "sec_role", "category_id", "username", "token", "name", "surname", "phone", "email"]
     cursor.execute(
-        "INSERT INTO users(user_id, sec_role_id, category_id, username, token, date_of_birth) VALUES "
-        "((SELECT max(ifnull(user_id, 0))+1 from users), ?, ?, ?, ?, ?)",
-        (sec_role_id, category_id, username, token, date_of_birth)
+        f"INSERT INTO users({','.join(col for col in cols)}) VALUES "
+        "((SELECT max(ifnull(user_id, 0))+1 from users), ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (organization_id, sec_role, category_id, username, token, name, surname, phone, email)
     ); connection.commit()
     user_id = cursor.lastrowid
     return user_id
@@ -82,3 +83,24 @@ def create_category(connection: sqlite3.Connection, cursor: sqlite3.Cursor, name
 
 def delete_category(connection: sqlite3.Connection, cursor: sqlite3.Cursor, category_id: int) -> None:
     cursor.execute(f"DELETE FROM categories where category_id = {category_id}"); connection.commit()
+
+def get_lessons(connection: sqlite3.Connection, cursor: sqlite3.Cursor, lesson_id: int) -> json:
+    cols = ["lesson_id", "video_src", "file_src"]
+    if lesson_id: cursor.execute(f"SELECT {','.join(col for col in cols)} from lessons WHERE lesson_id = {lesson_id}")
+    else: cursor.execute(f"SELECT {','.join(col for col in cols)} from lessons")
+    users = cursor.fetchall()
+    users_data = []
+    for user in users:
+        user_info = {}
+        for col_cnt, col in enumerate(cols):
+            user_info[col] = user[col_cnt]
+        users_data.append(user_info)
+    return users_data
+
+def create_lesson(connection: sqlite3.Connection, cursor: sqlite3.Cursor, video_src: str, file_src: str) -> json:
+    cursor.execute(f"INSERT INTO lessons(lesson_id, video_src, file_src) VALUES ((SELECT ifnull(max(lesson_id), 0)+1 from lessons), '{video_src}', '{file_src}')"); connection.commit()
+    lesson_id = cursor.lastrowid
+    return lesson_id
+
+def delete_lesson(connection: sqlite3.Connection, cursor: sqlite3.Cursor, lesson_id: int) -> None:
+    cursor.execute(f"DELETE FROM lessons where lesson_id = {lesson_id}"); connection.commit()

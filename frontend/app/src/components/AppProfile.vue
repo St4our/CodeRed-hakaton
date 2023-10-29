@@ -14,6 +14,11 @@ export default {
       login: 'Nikita',
     };
   },
+  methods: {
+    async profileLoad(){
+      let response = await axios.post(`/hello`)
+    }
+  },
 };
 </script>
 
