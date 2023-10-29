@@ -19,20 +19,26 @@ export default {
 </script>
 
 <template>
-  <div class="container1">
+  <div class="container1" v-if="$route.path != '/'">
     <div class="author">
       <span class="one">by</span> <span class="two">CodeRed</span>
     </div>
     <div class="img">
-      <RouterLink to="/">
-        <img src="./assets/codered.png" class="codered" alt="codered-png" />
+      <RouterLink to="/menu">
+        <img src="./assets/logo.png" class="codered" alt="logo.png" />
+        <p class="text-codered">CodeRed</p>
       </RouterLink>
       <RouterLink to="/menu/profile">
         <img src="./assets/profile.png" class="profile" alt="profile.png" />
       </RouterLink>
     </div>
     <app-background class="bg"></app-background>
-    <router-view class="register"></router-view>
+    <router-view class="register" v-if="$route.path != '/'"></router-view>
+  </div>
+
+
+  <div class="container1" v-if="$route.path == '/'">
+    <router-view v-if="$route.path == '/'"></router-view>
   </div>
 </template>
 
@@ -42,6 +48,12 @@ export default {
 }
 .main-color {
   color: #a71d31 !important;
+}
+.text-codered {
+  margin: 0 0 0 10px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .bg {
   height: 100vh;
@@ -93,7 +105,7 @@ export default {
   z-index: 2;
 }
 .codered {
-  height: 110px;
+  height: 50px;
   width: auto;
   cursor: pointer;
   z-index: 2;
@@ -110,12 +122,13 @@ a {
   color: white;
 }
 
-@media (max-width: 600px) {
-  .codered {
-    height: 75px;
-    width: auto;
-  }
+.img a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+@media (max-width: 600px) {
   .profile {
     height: 50px;
   }

@@ -9,8 +9,27 @@ export default {
         'Грузчик', 'Маляр', 'Шлифовщик', 'Трубопроводчик']
     };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    async request() {
+      try {
+        const response = await axios.get(
+          `http://192.168.66.168:5010/v1/categories`,
+          {
+            headers: {
+              Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
+            },
+          }
+        );
+        this.categories = response.data;
+        console.log(this.users);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  mounted() {
+    this.request();
+  },
 };
 </script>
 

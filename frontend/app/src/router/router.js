@@ -1,18 +1,19 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import AppRegister from '../components/AppRegister.vue'
-import AppLogin from '../components/AppLogin.vue'
-import ListOrganization from '../components/ListOrganization.vue'
-import ListAdmin from '../components/ListAdmin.vue'
-import ListUsers from '../components/ListUsers.vue'
-import CategoryUser from '../components/CategoryUser.vue'
-import AppTests from '../components/AppTests.vue'
-import TestCreate from '../create/TestCreate.vue'
-import AppMenu from '../components/AppMenu.vue'
-import AppProfile from '../components/AppProfile.vue'
-import AppMain from '../components/AppMain.vue'
-import AppChat from '../components/AppChat.vue'
-import AppTest from '../components/AppTest.vue'
-import AppLesson from '../components/AppLesson.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import AppRegister from '../components/AppRegister.vue';
+import AppLogin from '../components/AppLogin.vue';
+import ListOrganization from '../components/ListOrganization.vue';
+import ListAdmin from '../components/ListAdmin.vue';
+import ListUsers from '../components/ListUsers.vue';
+import CategoryUser from '../components/CategoryUser.vue';
+import AppTests from '../components/AppTests.vue';
+import TestCreate from '../create/TestCreate.vue';
+import AppMenu from '../components/AppMenu.vue';
+import AppProfile from '../components/AppProfile.vue';
+import AppMain from '../components/AppMain.vue';
+import AppChat from '../components/AppChat.vue';
+import AppTest from '../components/AppTest.vue';
+import AppLesson from '../components/AppLesson.vue';
+import AppPolicy from '../policy/AppPolicy.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,7 +22,7 @@ const router = createRouter({
       path: '/',
       name: 'main',
       component: AppMain,
-      alias: "/"
+      alias: '/',
     },
     {
       path: '/registration',
@@ -88,7 +89,12 @@ const router = createRouter({
       name: 'lesson',
       component: AppLesson,
     },
-  ]
-})
+    {
+      path: '/policy',
+      name: 'policy',
+      component: AppPolicy,
+    },
+  ],
+});
 
-export default router
+export default router;
