@@ -8,36 +8,7 @@ export default {
       nexttarget: 0,
       backtarget: 0,
       testindex: 0,
-      info: [
-        {
-          1: {
-            1: {
-              ques: ' 1. Что такое дуговая сварка?',
-              ans: {
-                ans1: 'Способ сварки, при котором электрод плавится и создает дугу между свариваемыми деталями.',
-                ans2: 'Процесс сварки, при котором используется лазер для соединения металлических деталей.',
-                ans3: 'Метод сварки, при котором используется газовое пламя для нагрева металла.',
-              },
-            },
-            2: {
-              ques: '2. Какая техника сварки используется для сварки алюминия?',
-              ans: {
-                ans1: 'Миговая сварка.',
-                ans2: 'Дуговая сварка с инертным газом.',
-                ans3: 'Ацетиленовая сварка.',
-              },
-            },
-            3: {
-              ques: '3. Какая защита необходима при работе со сварочным оборудованием?',
-              ans: {
-                ans1: 'Защитная маска и перчатки.',
-                ans2: 'Специальный костюм с изоляцией от электричества.',
-                ans3: 'Никакая защита не требуется при работе со сварочным оборудованием.',
-              },
-            },
-          },
-        },
-      ],
+      info: []
     };
   },
   methods: {
@@ -60,9 +31,22 @@ export default {
       let group = document.querySelector(`.group`);
       group.style.transform = `translateX(${this.testindex}%)`;
     },
+    async testload(){
+      let response = await axios.get(`/tests`, {
+        params:{
+          test_id: this.$route.query.id
+        },
+        headers: {
+          Authorization: document.cookie.replace(`token=`, ``),
+        },
+      });
+      
+      this.info = response.data.tests;
+    }
   },
   mounted() {
     this.start();
+    this.testload()
   },
 };
 </script>
@@ -73,15 +57,15 @@ export default {
     <div class="overflow">
       <div class="group">
         <div
-          v-for="(item, index) in info[0]"
+          v-for="(item, index) in info"
           class="wrapper-test"
           :class="{ next: nexttarget == 1, back: backtarget == 1 }"
         >
           <div class="question">
-            <span>{{index + item[index].ques }}</span>
+            <span>{{item.name}}</span>
           </div>
           <div class="test-body">
-            <div class="form-check" v-for="(ans, i) in item[index].ans">
+            <div class="form-check" v-for="(ans, i) in info.questions">
               <input
                 class="form-check-input"
                 type="radio"

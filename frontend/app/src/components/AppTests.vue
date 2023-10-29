@@ -5,32 +5,50 @@ import axios from 'axios';
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      Tests: [],
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    async testsLoad() {
+      let response = await axios.get(`/tests`, {
+        headers: {
+          Authorization: document.cookie.replace(`token=`, ``),
+        },
+      });
+      this.Tests = response.data.tests;
+    },
+  },
+  mounted() {
+    this.testsLoad();
+  },
 };
 </script>
 <template>
   <div class="wrapper">
     <h1>Тесты</h1>
     <div class="wrapper-for-tests">
-      <RouterLink v-for="(item,index) in 10" :to="'/menu/tests/test?id='+index">
+      <RouterLink
+        v-for="(item, index) in Tests"
+        :to="'/menu/tests/test?id=' + item.test_id"
+      >
         <div class="test">
-          <h4 class="title">На сколько ты сварщик</h4>
-          <div class="points">?/100</div>
+          <h4 class="title">{{ item.name }}</h4>
+          <div class="points">?/{{ item.questions.length }}</div>
         </div>
       </RouterLink>
     </div>
     <div class="create">
-      <RouterLink class="btn btn-outline-success" to="/menu/test/create">Создать</RouterLink>
+      <RouterLink class="btn btn-outline-success" to="/menu/test/create"
+        >Создать</RouterLink
+      >
     </div>
   </div>
 </template>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500&display=swap');
-a{
-  color: #9c9e9e
+a {
+  color: #9c9e9e;
 }
 *,
 *:before,

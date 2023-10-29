@@ -8,36 +8,24 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
 
-def sql_scheme(cursor: sqlite3.Cursor):
-    cursor.execute("""CREATE TABLE IF NOT EXISTS organizations (organization_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL)""")
-    cursor.execute("""CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY NOT NULL, organization_id INTEGER NOT NULL, sec_role TEXT NOT NULL, category_id INTEGER NOT NULL, username TEXT NOT NULL, token TEXT NOT NULL, name TEXT NOT NULL, surname NOT NULL, phone TEXT NOT NULL, email TEXT NOT NULL)""")
-    cursor.execute("""CREATE TABLE IF NOT EXISTS categories (category_id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL)""")
-    cursor.execute("""CREATE TABLE IF NOT EXISTS lessons (lesson_id INTEGER PRIMARY KEY NOT NULL, video_src TEXT NOT NULL, file_src TEXT NOT NULL)""")
-
-    create_user(connection, cursor, 'sample_role', 1, 1, 'bax', 'YmF4OkJheHRpeW9yb3YyMTE3', 'Sample', 'User', '123-456-7890', 'sample@example.com')
-
 BASE_PATH = os.path.dirname(os.path.realpath(__file__))
 connection = sqlite3.connect("db.sqlite3", check_same_thread=False)
-cursor = connection.cursor(); sql_scheme(cursor)
+cursor = connection.cursor()
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 version = "v1"
 
-
 @app.route(f'/{version}/hello', methods=['POST'])
-def hello():
+def hello_post():
     try:
         data = request.get_json()
+        result = {}
         fio = data['params']['fio']
         number = data['params']['number']
         inn = data['params']['inn']
         mail = data['params']['mail']
         organization = data['params']['organization']
         adress = data['params']['adress']
-
-
-
-
         cont = f"""
             ФИО : {fio}\n
 
@@ -56,7 +44,7 @@ def hello():
         f_port = "2525"
         f_user = "codered_it@coderedit.ru"
         f_passwd = "Stas_2001"
-        to = "stanislavd491@gmail.com"
+        to = "okolofutbol07@gmail.com"
         smtpserver = smtplib.SMTP(f_host, f_port)
         smtpserver.ehlo()
         smtpserver.starttls()
@@ -65,17 +53,13 @@ def hello():
         msg = MIMEText(cont, 'html')
         msg['From'] = "codered_it@coderedit.ru"
         msg['To'] = to
-        smtpserver.sendmail(f_user, to, msg.as_string())  # you just need to add
-                                                            # this in for loop in
-                                                            # your code.
+        smtpserver.sendmail(f_user, to, msg.as_string())
         smtpserver.close()
         print('Mail is sent successfully!!')
         result["success"] = True
     except Exception as exception:
-            result["success"] = False; result["error_msg"] = str(exception)
+        result["success"] = False; result["error_msg"] = str(exception)
     return jsonify(result)
-
-
 
 @app.route(f"/{version}/organizations", methods=["GET"])
 def organizations_get() -> json:
@@ -95,7 +79,8 @@ def organizations_post() -> json:
     token = request.headers.get('Authorization'); result = {}
     if is_token_valid(cursor, token):
         try:
-            name = request.args.get('name')
+            data = request.get_json()
+            name = data['params']['name']
             organization_id = create_organization(connection, cursor, name)
             result["success"] = True; result["organization_id"] = organization_id
         except Exception as exception:
@@ -112,8 +97,28 @@ def organizations_delete() -> json:
             delete_organization(connection, cursor, organization_id)
             result["success"] = True
         except Exception as exception:
-            result["success"] = False; result["error_msg"] = exception
+            result["success"] = False; result["error_msg"] = str(exception)
     else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
+    return jsonify(result)
+
+@app.route(f"/{version}/login", methods=["POST"])
+def login_post() -> json:
+    data = request.get_json()
+    result = {}
+    username = data['params']['username']
+    password = data['params']['password']
+    token = make_token(username, password)
+    print(username, password, token)
+    try:
+        if is_token_valid(cursor, token): 
+            result["success"] = True
+            cursor.execute(f"select user_id from users where token = '{token}'")
+            user_id = cursor.fetchone()[0]
+            users_data = get_users(connection, cursor, user_id)
+            result["success"] = True; result["users"] = users_data
+        else: result["success"] = False; result["error_msg"] = "Authorization data is not valid"
+    except Exception as exception:
+        result["success"] = False; result["error_msg"] = str(exception)
     return jsonify(result)
 
 @app.route(f"/{version}/users", methods=["GET"])
@@ -132,17 +137,19 @@ def users_get() -> json:
 @app.route(f"/{version}/users", methods=["POST"])
 def users_post() -> json:
     token = request.headers.get('Authorization'); result = {}
+    print(token, request.headers)
     if is_token_valid(cursor, token):
         try:
-            sec_role = request.args.get('sec_role')
-            organization_id = request.args.get('organization_id')
-            category_id = request.args.get('category_id')
-            username = request.args.get('username')
-            password = request.args.get('password')
-            name = request.args.get('name')
-            surname = request.args.get('surname')
-            phone = request.args.get('phone')
-            email = request.args.get('email')
+            data = request.get_json()
+            sec_role = data['params']['sec_role']
+            organization_id = data['params']['organization_id']
+            category_id = data['params']['category_id']
+            username = data['params']['username']
+            password = data['params']['password']
+            name = data['params']['name']
+            surname = data['params']['surname']
+            phone = data['params']['phone']
+            email = data['params']['email']
             token = make_token(username, password)
             user_id = create_user(connection, cursor, sec_role, organization_id, category_id, username, token, name, surname, phone, email)
             result["success"] = True; result["user_id"] = user_id
@@ -160,7 +167,7 @@ def users_delete() -> json:
             delete_user(connection, cursor, user_id)
             result["success"] = True
         except Exception as exception:
-            result["success"] = False; result["error_msg"] = exception
+            result["success"] = False; result["error_msg"] = str(exception)
     else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
     return jsonify(result)
 
@@ -182,7 +189,8 @@ def categories_post() -> json:
     token = request.headers.get('Authorization'); result = {}
     if is_token_valid(cursor, token):
         try:
-            name = request.args.get('name')
+            data = request.get_json()
+            name = data['params']['name']
             category_id = create_category(connection, cursor, name)
             result["success"] = True; result["category_id"] = category_id
         except Exception as exception:
@@ -199,7 +207,7 @@ def categories_delete() -> json:
             delete_category(connection, cursor, category_id)
             result["success"] = True
         except Exception as exception:
-            result["success"] = False; result["error_msg"] = exception
+            result["success"] = False; result["error_msg"] = str(exception)
     else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
     return jsonify(result)
 
@@ -221,9 +229,10 @@ def lessons_post() -> json:
     token = request.headers.get('Authorization'); result = {}
     if is_token_valid(cursor, token):
         try:
-            video_src = request.args.get('video_src')
-            file_src = request.args.get('file_src')
-            lesson_id = create_lesson(connection, cursor, video_src, file_src)
+            data = request.get_json()
+            video_src = data['params']['video_src']
+            title = data['params']['title']
+            lesson_id = create_lesson(connection, cursor, video_src, title)
             result["success"] = True; result["lesson_id"] = lesson_id
         except Exception as exception:
             result["success"] = False; result["error_msg"] = str(exception)
@@ -239,9 +248,54 @@ def lessons_delete() -> json:
             delete_lesson(connection, cursor, lesson_id)
             result["success"] = True
         except Exception as exception:
-            result["success"] = False; result["error_msg"] = exception
+            result["success"] = False; result["error_msg"] = str(exception)
     else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
     return jsonify(result)
+
+@app.route(f"/{version}/tests", methods=["GET"])
+def tests_get() -> json:
+    token = request.headers.get('Authorization'); result = {}
+    if is_token_valid(cursor, token):
+        try:
+            test_id = request.args.get('test_id')
+            tests_data = get_tests(connection, cursor, test_id)
+            result["success"] = True; result["tests"] = tests_data
+        except Exception as exception:
+            result["success"] = False; result["error_msg"] = str(exception)
+    else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
+    return jsonify(result)
+
+@app.route(f"/{version}/tests", methods=["POST"])
+def tests_post() -> json:
+    token = request.headers.get('Authorization'); result = {}
+    if is_token_valid(cursor, token):
+        try:
+            result["questions_id"] = []
+            data = request.get_json()
+            name = data['params']['name']
+            questions = data['params']['questions']
+            test_id = create_test(connection, cursor, name)
+            for question in questions:
+                question_id = create_question(connection, cursor, test_id, question["name"], question["answer_1"], question["answer_2"], question["answer_3"], question["correct_id"])
+                result["questions_id"].append(question_id)
+            result["success"] = True; result["test_id"] = test_id
+        except Exception as exception:
+            result["success"] = False; result["error_msg"] = str(exception)
+    else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
+    return jsonify(result)
+
+# @app.route(f"/{version}/tests", methods=["DELETE"])
+# def tests_delete() -> json:
+#     token = request.headers.get('Authorization'); result = {}
+#     if is_token_valid(cursor, token):
+#         try:
+#             test_id = request.args.get('test_id')
+#             delete_test(connection, cursor, test_id)
+#             result["success"] = True
+#         except Exception as exception:
+#             result["success"] = False; result["error_msg"] = exception
+#     else: result["success"] = False; result["error_msg"] = "Authorization token is not valid"
+#     return jsonify(result)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5010, debug=False)

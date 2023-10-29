@@ -79,9 +79,9 @@ const router = createRouter({
       component: AdminMenu,
     },
     {
-      path: '/menu/test',
-      name: 'test',
-      component: AppTest,
+      path: '/menu/tests',
+      name: 'tests',
+      component: AppTests,
     },
     {
       path: '/menu/test/create',

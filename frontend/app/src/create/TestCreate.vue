@@ -1,46 +1,60 @@
 <script>
+import axios from 'axios';
 import { RouterLink, RouterView } from 'vue-router';
 
 export default {
   data() {
     return {
-      test: [],
+      test: {},
       questions: [],
       question: '',
-      ans1: '',
-      ans2: '',
-      ans3: '',
+      answer_1: '',
+      answer_2: '',
+      answer_3: '',
       name: ``,
-      correct: '',
+      correct_id: '',
       counter: 1,
-      message: ''
+      message: '',
     };
   },
   methods: {
     add_question() {
       this.questions.push({
-        question: this.question,
-        ans1: this.ans1,
-        ans2: this.ans2,
-        ans3: this.ans3,
-        correct: this.correct,
+        name: this.question,
+        answer_1: this.answer_1,
+        answer_2: this.answer_2,
+        answer_3: this.answer_3,
+        correct_id: this.correct_id,
       });
       this.question = '';
-      this.ans1 = '';
-      this.ans2 = '';
-      this.ans3 = '';
-      this.correct = '';
+      this.answer_1 = '';
+      this.answer_2 = '';
+      this.answer_3 = '';
+      this.correct_id = '';
       this.counter += 1;
     },
 
-    create_test() {
-      this.test.push({
+    async create_test() {
+      this.test = {
         name: this.name,
-        question: this.questions,
-      });
-      this.name = ''
-      this.message = "Создано"
-      this.$router.go(-1)
+        questions: this.questions,
+      };
+      console.log(this.test);
+      this.name = '';
+      this.message = 'Создано';
+      let response = await axios.post(
+        `/tests`,
+        {
+          params: this.test,
+        },
+        {
+          headers: {
+            Authorization: document.cookie.replace(`token=`, ``),
+          },
+        }
+      );
+      console.log(response.data);
+      if(response.data.success){this.$router.go(-1)}
     },
   },
 };
@@ -65,15 +79,15 @@ export default {
             <input type="text" v-model="question" placeholder="Вопрос" />
           </div>
           <div class="test-body">
-            <input type="text" v-model="ans1" :placeholder="'Ответ1'" />
+            <input type="text" v-model="answer_1" :placeholder="'Ответ1'" />
 
-            <input type="text" v-model="ans2" :placeholder="'Ответ2'" />
+            <input type="text" v-model="answer_2" :placeholder="'Ответ2'" />
 
-            <input type="text" v-model="ans3" :placeholder="'Ответ3'" />
+            <input type="text" v-model="answer_3" :placeholder="'Ответ3'" />
 
             <input
               type="number"
-              v-model="correct"
+              v-model="correct_id"
               :placeholder="'Номер правильного ответа'"
             />
           </div>
@@ -93,21 +107,22 @@ export default {
 </template>
 
 <style scoped>
-button{
+button {
   background: transparent;
   color: #fff;
 }
-.success{
+.success {
   position: absolute;
   bottom: 10%;
   color: #3f7512 !important;
 }
-input{
+input {
   border-radius: 10px;
+  color: #fff;
   padding: 5px;
   background: transparent;
 }
-input::placeholder{
+input::placeholder {
   color: #fff;
 }
 .question span {
