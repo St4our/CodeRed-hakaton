@@ -8,19 +8,21 @@ export default {
     return {};
   },
   methods: {
+    go_down() {
+      window.scrollTo({
+        top: 1000,
+        behavior: "smooth",
+      });
+    },
 
+    go_up(){
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   },
   mounted() {},
-  directives: {
-    scroll: {
-      inserted: function (el, binding) {
-        el.addEventListener('click', function () {
-          document.querySelector(binding.value).scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-    }
-  }
-
 };
 </script>
 
@@ -28,8 +30,9 @@ export default {
   <div class="wrapper">
     <div class="nav">
       <div class="item">О нас</div>
-      <div class="item" v-scroll="'#bottom'">Тарифы</div>
-      <div class="item"><RouterLink to="/menu">Меню</RouterLink></div>
+      <div class="item" @click="go_down">Тарифы</div>
+      <div class="item"><RouterLink to="/form">Оставить заявку</RouterLink></div>
+      <div class="item active"><RouterLink to="/login">Войти</RouterLink></div>
     </div>
     <div class="content">
       <div class="text">
@@ -60,7 +63,7 @@ export default {
             <li class="bottom-bar">до 5 сотрудников</li>
             <li class="bottom-bar">1 администратор</li>
             <li class="bottom-bar">до 10 уроков</li>
-            <li><button class="btn">Подробнее</button></li>
+            <li><RouterLink to="/form" class="btn">Подробнее</RouterLink></li>
           </ul>
         </div>
         <div class="card active">
@@ -70,7 +73,7 @@ export default {
             <li class="bottom-bar">до 20 сотрудников</li>
             <li class="bottom-bar">до 2 администраторов</li>
             <li class="bottom-bar">до 50 уроков</li>
-            <li><button class="btn active-btn">Подробнее</button></li>
+            <li><RouterLink to="/form" class="btn active-btn">Подробнее</RouterLink></li>
           </ul>
         </div>
         <div class="card shadow">
@@ -80,7 +83,7 @@ export default {
             <li class="bottom-bar">до 100 сотрудников</li>
             <li class="bottom-bar">до 3 администраторов</li>
             <li class="bottom-bar">до 100 уроков</li>
-            <li><button class="btn">Подробнее</button></li>
+            <li><RouterLink to="/form" class="btn">Подробнее</RouterLink></li>
           </ul>
         </div>
       </div>
@@ -93,13 +96,14 @@ export default {
         </RouterLink>
       </div>
       <div class="nav-bottom">
-        <div class="item">О нас</div>
+        <div class="item" @click="go_up">О нас</div>
         <div class="item">Тарифы</div>
-        <div class="item"><RouterLink to="/menu">Меню</RouterLink></div>
-        <div class="item"><RouterLink to="/policy">Политика Конфиденциальности</RouterLink></div>
+        <div class="item"><RouterLink to="/form">Оставить заявку</RouterLink></div>
+        <div class="item">
+          <RouterLink to="/policy">Политика Конфиденциальности</RouterLink>
+        </div>
       </div>
     </div>
-  
   </div>
 </template>
 <style scoped>
@@ -136,7 +140,6 @@ a {
   z-index: 2;
 }
 
-
 body {
   display: flex;
   justify-content: center;
@@ -156,7 +159,7 @@ body {
   z-index: 1;
 }
 .nav {
-  position: absolute;
+  margin-top: 10px;
   top: 2%;
   display: flex;
   justify-content: center;
@@ -181,7 +184,6 @@ body {
 }
 
 .services {
-  
 }
 
 .item {
@@ -190,9 +192,20 @@ body {
   transition: color 300ms;
 }
 
-.item.active, .item:hover, .item a:hover, .item a:active{
+.item.active,
+.item:hover,
+.item a:hover,
+.item a:active {
   cursor: pointer;
   color: #950707;
+}
+
+.active a{
+  color: #950707;
+}
+
+.active a:hover, .active a:active {
+  color: #fff;
 }
 
 .wrapper {
@@ -321,7 +334,6 @@ span:nth-of-type(6) {
   align-items: center;
 }
 
-
 /* Services */
 
 .sub {
@@ -364,7 +376,7 @@ span:nth-of-type(6) {
 }
 
 .cards .card.active {
-  background: rgb(149, 7, 7);;
+  background: rgb(149, 7, 7);
   color: #fff;
   display: flex;
   align-items: center;
@@ -506,6 +518,37 @@ ul li.price {
 }
 
 @media (max-width: 930px) {
-  
+  .content {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 825px) {
+  .content {
+    flex-direction: column;
+  }
+  .text {
+    width: 80%;
+  }
+
+  .nav-bottom {
+    gap: 15px;
+  }
+
+  .item {
+    font-size: medium;
+  }
+}
+
+@media (max-width: 420px) {
+
+  .nav-bottom {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .h1 {
+    font-size: 34px;
+  }
 }
 </style>

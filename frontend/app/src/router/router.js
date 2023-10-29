@@ -5,17 +5,22 @@ import ListOrganization from '../components/ListOrganization.vue';
 import ListAdmin from '../components/ListAdmin.vue';
 import ListUsers from '../components/ListUsers.vue';
 import CategoryUser from '../components/CategoryUser.vue';
-import AppTests from '../components/AppTests.vue';
+import AppTest from '../components/AppTest.vue';
 import TestCreate from '../create/TestCreate.vue';
-import AppMenu from '../components/AppMenu.vue';
-import AppProfile from '../components/AppProfile.vue';
+import AppMenu from '../menu/AppMenu.vue';
+import AdminMenu from '../menu/AdminMenu.vue';
+import SuperMenu from '../menu/SuperMenu.vue';
 import AppMain from '../components/AppMain.vue';
 import AppChat from '../components/AppChat.vue';
-import AppTest from '../components/AppTest.vue';
+import AppForm from '../components/AppForm.vue';
+import AppPolicy from '../policy/AppPolicy.vue';
+import CreateOrganization from '../create/CreateOrganization.vue';
+import CreateCategory from '../create/CreateCategory.vue';
+import AppTests from '../components/AppTests.vue';
+import AppProfile from '../components/AppProfile.vue';
 import AppLesson from '../components/AppLesson.vue';
 import AppLessons from '../components/AppLessons.vue';
 import LessonCreate from '../create/LessonCreate.vue';
-import AppPolicy from '../policy/AppPolicy.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,7 +42,7 @@ const router = createRouter({
       component: AppLogin,
     },
     {
-      path: '/menu/list/organization',
+      path: '/supermenu/list/organization',
       name: 'listorganization',
       component: ListOrganization,
     },
@@ -47,12 +52,12 @@ const router = createRouter({
       component: ListAdmin,
     },
     {
-      path: '/list/users',
+      path: '/adminmenu/list/users/category/users',
       name: 'listusers',
       component: ListUsers,
     },
     {
-      path: '/menu/list/users/category',
+      path: '/adminmenu/list/users/category',
       name: 'categoryusers',
       component: CategoryUser,
     },
@@ -64,7 +69,19 @@ const router = createRouter({
     {
       path: '/menu/tests',
       name: 'tests',
-      component: AppTests,
+      path: '/supermenu',
+      name: 'supermenu',
+      component: SuperMenu,
+    },
+    {
+      path: '/adminmenu',
+      name: 'adminmenu',
+      component: AdminMenu,
+    },
+    {
+      path: '/menu/test',
+      name: 'test',
+      component: AppTest,
     },
     {
       path: '/menu/test/create',
@@ -105,6 +122,21 @@ const router = createRouter({
       path: '/menu/lesson/create',
       name: 'lesson-create',
       component: LessonCreate,
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: AppForm,
+    },
+    {
+      path: '/supermenu/list/organization/create',
+      name: 'createorganization',
+      component: CreateOrganization,
+    },
+    {
+      path: '/adminmenu/list/users/category/create',
+      name: 'createcategory',
+      component: CreateCategory,
     },
   ],
 });

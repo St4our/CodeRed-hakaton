@@ -1,82 +1,42 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import axios from "axios";
+
 export default {
   components: {},
   data() {
     return {
-      username: ``,
-      password: ``,
-      users: [],
-      user: "",
-      error: ``,
-      status: ``,
-      f: "",
-      success: "",
+        fio: '',
+        number: '',
+        inn: '',
+        mail: '',
+        organization: '',
+        adress: '',
     };
   },
   methods: {
     async submit() {
       try {
-        const response = await axios.post(`/login`, {
-          params: {
-            username: this.username,
-            password: this.password,
-          },
-        });
-        this.success = response.data.success;
-        console.log(response.data)
-        if (this.success) {
-          this.user = response.data.users[0];
-          this.$refs.form.reset();
-          document.cookie = new String();
-          document.cookie = `token=${this.user.token}; max-age=2419200`;
-          if (this.user.sec_role == "super") {
-            console.log("super");
-            this.$router.push({ name: "supermenu" });
-          } else if (this.user.sec_role == "admin") {
-            console.log("admin");
-            this.$router.push({ name: "adminmenu" });
-          } else {
-            console.log("user");
-            this.$router.push({ name: "menu" });
-          }
-          this.$router.push({ name: "menu" });
-        }
+          console.log('ya tyt')
+          let response = await axios.post(
+            `http://192.168.222.168:5010/v1/hello`,
+            {
+              params: {
+                fio: this.fio,
+                number: this.number,
+                inn: this.inn,
+                mail: this.mail,
+                organization: this.organization,
+                adress: this.adress
+              }
+            }
+          );
+          
+          console.log(response.data);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     },
-
-    // async submit() {
-    //   this.user = this.users.find(
-    //     (u) =>
-    //       u.username == this.username &&
-    //       u.token == btoa(this.username + ":" + this.password)
-    //   );
-    //   if (this.user) {
-    //     this.f = true;
-    //   } else {
-    //     this.f = false;
-    //   }
-    //   setTimeout(() => {
-    //     if (this.f) {
-    //       this.$refs.form.reset();
-    //       document.cookie = new String();
-    //       document.cookie = `token=${this.user.token}; max-age=2419200`;
-    //       if (this.user.sec_role == "super") {
-    //         this.$router.push({ name: "supermenu" });
-    //       } else if (this.user.sec_role == "admin") {
-    //         this.$router.push({ name: "adminmenu" });
-    //       } else {
-    //         this.$router.push({ name: "menu" });
-    //       }
-    //     }
-    //   }, 1000);
-    //   setTimeout(() => {
-    //     this.f = false;
-    //   }, 5000);
-    // },
   },
   mounted() {},
 };
@@ -86,24 +46,42 @@ export default {
   <div class="container">
     <div class="image">
       <div class="form-box">
-        <h2 class="title">Вход</h2>
+        <h2 class="title">Заявка</h2>
         <div class="form">
           <form ref="form" @submit.prevent="submit">
             <div class="input-box">
-              <input v-model="username" type="text" class="username" required />
-              <label for="">Логин</label>
+              <input type="text" v-model="fio" required id="fio" />
+              <label for="" class="fio">ФИО</label>
+            </div>
+            <div class="input-box">
+              <input type="text" v-model="inn" required id="inn" />
+              <label for="" class="inn">ИНН Организации</label>
+            </div>
+            <div class="input-box">
+              <input type="text" v-model="adress" required id="adress" />
+              <label for="" class="adress">Адрес Организации</label>
             </div>
             <div class="input-box">
               <input
-                v-model="password"
-                type="password"
-                class="password"
+                type="text"
+                v-model="organization"
                 required
+                id="organization"
               />
-              <label for="">Пароль</label>
+              <label for="" class="organization">Организация</label>
+            </div>
+            <div class="input-box">
+              <input type="text" v-model="number" required id="number" />
+              <label for="" class="number">Номер телефона</label>
+            </div>
+            <div class="input-box">
+              <input type="email" v-model="mail" required id="mail" />
+              <label for="" class="mail">Почта</label>
             </div>
             <div class="sign-up">
-              <button type="submit" class="sign-in">Войти</button>
+              <button class="sign-up-btn" type="submit" id="sign-up">
+                Отправить
+              </button>
             </div>
           </form>
         </div>
@@ -111,7 +89,6 @@ export default {
     </div>
   </div>
 </template>
-
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500&display=swap");
 
@@ -123,7 +100,6 @@ export default {
   font-family: "Poppins", sans-serif;
   color: #fff;
 }
-
 body {
   display: flex;
   /* background: #0c1022; */
@@ -135,7 +111,7 @@ body {
 }
 
 .container {
-  position: relative;
+  position: absolute;
   width: 350px;
   height: 650px;
   background: rgba(0, 0, 0.75);
@@ -221,7 +197,7 @@ body {
 
 .form .input-box {
   position: relative;
-  margin: 37px 0;
+  margin: 10px 0;
   width: 310px;
   border-bottom: 2px solid black;
 }
@@ -283,8 +259,7 @@ input:valid ~ label {
   outline: none;
   border: none;
   border-radius: 5px;
-  background-color: #a71d31;
-  /* #FF8200 */
+  background-color: #ff8200;
 }
 
 .sign-up-btn {
@@ -338,30 +313,9 @@ input:valid ~ label {
   font-size: 30px;
 }
 
-.author {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  margin-bottom: 10px;
-}
-
-.text {
-  font-size: small;
-}
-
-.text > .one {
-  font-size: smaller;
-}
-
-.text > .two {
-  color: #a71d31;
-}
-.codered {
-  height: 75px;
-  width: auto;
+@media (max-width: 700px) {
+  .container {
+    height: 560px;
+  }
 }
 </style>

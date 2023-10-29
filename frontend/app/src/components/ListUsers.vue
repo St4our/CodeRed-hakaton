@@ -14,7 +14,7 @@ export default {
     async request() {
       try {
         const response = await axios.get(
-          `http://192.168.66.168:5010/v1/users`,
+          `/users`,
           {
             headers: {
               Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
@@ -31,7 +31,7 @@ export default {
     async delete_ID() {
       try {
         const response = await axios.delete(
-          `http://192.168.66.168:5010/v1/users`,
+          `/users`,
           {
             params: {
               user_id: 2
@@ -56,199 +56,25 @@ export default {
 
 <template>
   <div class="wrapper">
-    <h1>Список пользователей</h1>
-    <div class="scroll-table">
-      <table>
+    <h1>Список Пользователей</h1>
+    <div class="scroll-table glass">
+      <table class="table table-dark">
         <thead>
-          <tr class="list-nav">
+          <tr class="">
             <th>Индекс</th>
-            <th>Название</th>
-            <th>Удаление</th>
+            <th>Категория</th>
             <th>Переход</th>
           </tr>
         </thead>
       </table>
-      <div class="scroll-table-body">
+      <div class="scroll-table-body glass">
         <table>
-          <tbody>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
+          <tbody class="scroll-table-body glass" >
+            <tr v-for="(item, index) in this.users" class="list-item">
+              <td>{{index + 1}}</td>
+              <td>{{item}}</td>
               <td>
-                <button type="button" @click="delete_ID" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
-                >
-              </td>
-            </tr>
-            <tr class="list-item">
-              <td>index</td>
-              <td>Codered</td>
-              <td>
-                <button type="button" class="btn btn-outline-danger">
-                  Удалить
-                </button>
-              </td>
-              <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
+                <RouterLink to="/adminmenu/list/users/category/users" class="btn btn-outline-light transition"
                   >Перейти</RouterLink
                 >
               </td>
@@ -258,13 +84,12 @@ export default {
       </div>
     </div>
     <div class="create">
-      <RouterLink class="btn btn-outline-success" to="#">Создать</RouterLink>
+      <RouterLink class="btn btn-outline-success" to="/adminmenu/list/users/category/create">Создать</RouterLink>
     </div>
   </div>
 </template>
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500&display=swap");
-
 *,
 *:before,
 *:after {
@@ -272,14 +97,20 @@ export default {
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
-
 a {
   text-decoration: none;
 }
-
 tbody a {
   color: #fff;
 }
+.glass {
+    border-radius: 16px !important;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 10%) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(9, 9, 9, 0.3) !important;
+  }
+
 
 .wrapper {
   width: 100%;
@@ -288,34 +119,26 @@ tbody a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 35px;
 }
-
 .btn-outline-danger,
 .btn-outline-success,
 .btn-outline-light {
   padding: 5px 7px;
 }
-
 .create {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-h1 {
-  position: absolute;
-  top: 10%;
-}
-
 .scroll-table-body {
   height: 500px;
   overflow-x: auto;
   margin-top: 0px;
   margin-bottom: 20px;
-  border: 1px solid #fff;
-  border-top: none;
+
 }
 .scroll-table table {
   width: 100%;
@@ -335,7 +158,6 @@ h1 {
   font-size: 14px;
   vertical-align: top;
 }
-
 /* Стили для скролла */
 ::-webkit-scrollbar {
   width: 6px;
@@ -346,29 +168,22 @@ h1 {
 ::-webkit-scrollbar-thumb {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
-
 .list-item {
-  border: 1px solid #fff;
-  transition: background-color 300ms;
+  
+  transition: background-color 500ms;
 }
 
-.list-item:hover {
-  background-color: #06070e;
-}
-
-.list-nav {
-  border: 1px solid #fff;
+.list-item:hover, .list-item:active {
+    background-color: #35393C;
 }
 
 @media (max-width: 550px) {
   .scroll-table-body {
     height: 300px;
   }
-
   .wrapper {
     padding: 0 10px;
   }
-
   .btn-outline-danger,
   .btn-outline-success,
   .btn-outline-light {

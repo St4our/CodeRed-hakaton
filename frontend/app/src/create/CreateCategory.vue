@@ -1,82 +1,63 @@
 <script>
 import { RouterLink, RouterView } from "vue-router";
 import axios from "axios";
+
 export default {
   components: {},
   data() {
     return {
-      username: ``,
-      password: ``,
-      users: [],
-      user: "",
-      error: ``,
-      status: ``,
-      f: "",
-      success: "",
+      name: "",
+      surname: "",
+      email: "",
+      organization_id: "1",
+      category_id: "1",
+      username: "",
+      password: "",
+      sec_role: "sample_role",
+      error: "",
+      status: 0,
     };
   },
   methods: {
     async submit() {
       try {
-        const response = await axios.post(`/login`, {
-          params: {
-            username: this.username,
-            password: this.password,
-          },
-        });
-        this.success = response.data.success;
-        console.log(response.data)
-        if (this.success) {
-          this.user = response.data.users[0];
-          this.$refs.form.reset();
-          document.cookie = new String();
-          document.cookie = `token=${this.user.token}; max-age=2419200`;
-          if (this.user.sec_role == "super") {
-            console.log("super");
-            this.$router.push({ name: "supermenu" });
-          } else if (this.user.sec_role == "admin") {
-            console.log("admin");
-            this.$router.push({ name: "adminmenu" });
-          } else {
-            console.log("user");
-            this.$router.push({ name: "menu" });
-          }
-          this.$router.push({ name: "menu" });
+        if (this.password && this.name) {
+          let response = await axios.post(
+            `/users`,
+            {
+              params: {
+                name: this.name,
+                surname: this.surname,
+                phone: this.phone,
+                email: this.email,
+                organization_id: this.organization_id,
+                category_id: this.category_id,
+                username: this.username,
+                password: this.password,
+                sec_role: this.sec_role,
+              },
+            },
+            {
+              headers: {
+                Authorization: document.cookie.replace(`token=`, ``),
+              },
+            }
+          );
+          console.log(response.data);
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
+      // setTimeout(() => {
+      //     if (this.status) {
+      //     this.$refs.form.reset();
+      //     console.log('Всё четко')
+      //     }
+      // }, 1000);
+      // setTimeout(() => {
+      //     (this.status = false);
+      // }, 3000);
     },
-
-    // async submit() {
-    //   this.user = this.users.find(
-    //     (u) =>
-    //       u.username == this.username &&
-    //       u.token == btoa(this.username + ":" + this.password)
-    //   );
-    //   if (this.user) {
-    //     this.f = true;
-    //   } else {
-    //     this.f = false;
-    //   }
-    //   setTimeout(() => {
-    //     if (this.f) {
-    //       this.$refs.form.reset();
-    //       document.cookie = new String();
-    //       document.cookie = `token=${this.user.token}; max-age=2419200`;
-    //       if (this.user.sec_role == "super") {
-    //         this.$router.push({ name: "supermenu" });
-    //       } else if (this.user.sec_role == "admin") {
-    //         this.$router.push({ name: "adminmenu" });
-    //       } else {
-    //         this.$router.push({ name: "menu" });
-    //       }
-    //     }
-    //   }, 1000);
-    //   setTimeout(() => {
-    //     this.f = false;
-    //   }, 5000);
-    // },
   },
   mounted() {},
 };
@@ -86,24 +67,17 @@ export default {
   <div class="container">
     <div class="image">
       <div class="form-box">
-        <h2 class="title">Вход</h2>
+        <h2 class="title">Создание категории</h2>
         <div class="form">
           <form ref="form" @submit.prevent="submit">
             <div class="input-box">
-              <input v-model="username" type="text" class="username" required />
-              <label for="">Логин</label>
-            </div>
-            <div class="input-box">
-              <input
-                v-model="password"
-                type="password"
-                class="password"
-                required
-              />
-              <label for="">Пароль</label>
+              <input type="text" v-model="name" required id="name" />
+              <label for="" class="name">Название</label>
             </div>
             <div class="sign-up">
-              <button type="submit" class="sign-in">Войти</button>
+              <button class="sign-up-btn" type="submit" id="sign-up">
+                Создать
+              </button>
             </div>
           </form>
         </div>
@@ -111,7 +85,6 @@ export default {
     </div>
   </div>
 </template>
-
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500&display=swap");
 
@@ -135,7 +108,7 @@ body {
 }
 
 .container {
-  position: relative;
+  position: absolute;
   width: 350px;
   height: 650px;
   background: rgba(0, 0, 0.75);
@@ -221,7 +194,7 @@ body {
 
 .form .input-box {
   position: relative;
-  margin: 37px 0;
+  margin: 10px 0;
   width: 310px;
   border-bottom: 2px solid black;
 }
@@ -283,8 +256,7 @@ input:valid ~ label {
   outline: none;
   border: none;
   border-radius: 5px;
-  background-color: #a71d31;
-  /* #FF8200 */
+  background-color: #ff8200;
 }
 
 .sign-up-btn {
@@ -335,33 +307,12 @@ input:valid ~ label {
 }
 
 .title {
-  font-size: 30px;
+  font-size: 25px;
 }
 
-.author {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  margin-bottom: 10px;
-}
-
-.text {
-  font-size: small;
-}
-
-.text > .one {
-  font-size: smaller;
-}
-
-.text > .two {
-  color: #a71d31;
-}
-.codered {
-  height: 75px;
-  width: auto;
+@media (max-width: 700px) {
+  .container {
+    height: 560px;
+  }
 }
 </style>
