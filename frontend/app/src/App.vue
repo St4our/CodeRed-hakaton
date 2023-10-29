@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <div class="container1" v-if="$route.path != '/'">
+  <div class="container1" v-if="$route.path != '/' && $route.path != '/login'">
     <div class="author">
       <span class="one">by</span> <span class="two">CodeRed</span> Team
     </div>
@@ -32,6 +32,21 @@ export default {
     </div>
     <app-background class="bg"></app-background>
     <router-view class="register" v-if="$route.path != '/'"></router-view>
+  </div>
+
+
+  <div class="container1" v-if="$route.path == '/login'">
+    <div class="author">
+      <span class="one">by</span> <span class="two">CodeRed</span> Team
+    </div>
+    <div class="img">
+      <RouterLink to="/">
+        <img src="./assets/logo.png" class="codered" alt="logo.png" />
+        <p class="text-codered">CodeRed</p>
+      </RouterLink>
+    </div>
+    <app-background class="bg"></app-background>
+    <router-view class="register" v-if="$route.path == '/login'"></router-view>
   </div>
 
 

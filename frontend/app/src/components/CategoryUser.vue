@@ -53,7 +53,7 @@ export default {
               <td>{{index + 1}}</td>
               <td>{{item}}</td>
               <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
+                <RouterLink to="/adminmenu/list/users/category/users" class="btn btn-outline-light transition"
                   >Перейти</RouterLink
                 >
               </td>
@@ -63,7 +63,7 @@ export default {
       </div>
     </div>
     <div class="create">
-      <RouterLink class="btn btn-outline-success" to="#">Создать</RouterLink>
+      <RouterLink class="btn btn-outline-success" to="/adminmenu/list/users/category/create">Создать</RouterLink>
     </div>
   </div>
 </template>

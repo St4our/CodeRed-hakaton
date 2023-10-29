@@ -23,7 +23,7 @@ export default {
       try {
         if (this.password && this.name) {
           let response = await axios.post(
-            `http://192.168.66.168:5010/v1/users`,
+            `/users`,
             {
               params: {
                 name: this.name,
@@ -36,8 +36,10 @@ export default {
                 password: this.password,
                 sec_role: this.sec_role,
               },
+            },
+            {
               headers: {
-                Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
+                Authorization: document.cookie.replace(`token=`, ``),
               },
             }
           );

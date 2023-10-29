@@ -7,11 +7,17 @@ import ListUsers from '../components/ListUsers.vue'
 import CategoryUser from '../components/CategoryUser.vue'
 import AppTest from '../components/AppTest.vue'
 import TestCreate from '../create/TestCreate.vue'
-import AppMenu from '../components/AppMenu.vue'
+import AppMenu from '../menu/AppMenu.vue'
+import AdminMenu from '../menu/AdminMenu.vue'
+import SuperMenu from '../menu/SuperMenu.vue'
 import AppPerson from '../components/AppPerson.vue'
 import AppMain from '../components/AppMain.vue'
 import AppChat from '../components/AppChat.vue'
+import AppForm from '../components/AppForm.vue'
 import AppPolicy from '../policy/AppPolicy.vue'
+import CreateOrganization from '../create/CreateOrganization.vue'
+import CreateCategory from '../create/CreateCategory.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,7 +39,7 @@ const router = createRouter({
       component: AppLogin,
     },
     {
-      path: '/menu/list/organization',
+      path: '/supermenu/list/organization',
       name: 'listorganization',
       component: ListOrganization,
     },
@@ -43,12 +49,12 @@ const router = createRouter({
       component: ListAdmin,
     },
     {
-      path: '/list/users',
+      path: '/adminmenu/list/users/category/users',
       name: 'listusers',
       component: ListUsers,
     },
     {
-      path: '/menu/list/users/category',
+      path: '/adminmenu/list/users/category',
       name: 'categoryusers',
       component: CategoryUser,
     },
@@ -56,6 +62,16 @@ const router = createRouter({
       path: '/menu',
       name: 'menu',
       component: AppMenu,
+    },
+    {
+      path: '/supermenu',
+      name: 'supermenu',
+      component: SuperMenu,
+    },
+    {
+      path: '/adminmenu',
+      name: 'adminmenu',
+      component: AdminMenu,
     },
     {
       path: '/menu/test',
@@ -76,6 +92,21 @@ const router = createRouter({
       path: '/policy',
       name: 'policy',
       component: AppPolicy,
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: AppForm,
+    },
+    {
+      path: '/supermenu/list/organization/create',
+      name: 'createorganization',
+      component: CreateOrganization,
+    },
+    {
+      path: '/adminmenu/list/users/category/create',
+      name: 'createcategory',
+      component: CreateCategory,
     },
   ]
 })
