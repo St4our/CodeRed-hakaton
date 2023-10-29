@@ -11,6 +11,7 @@ import AppMenu from '../components/AppMenu.vue'
 import AppPerson from '../components/AppPerson.vue'
 import AppMain from '../components/AppMain.vue'
 import AppChat from '../components/AppChat.vue'
+import AppPolicy from '../policy/AppPolicy.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -70,6 +71,11 @@ const router = createRouter({
       path: '/menu/chat',
       name: 'chat',
       component: AppChat,
+    },
+    {
+      path: '/policy',
+      name: 'policy',
+      component: AppPolicy,
     },
   ]
 })

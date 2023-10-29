@@ -5,10 +5,52 @@ import axios from "axios";
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      users: [],
+      success: ''
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    async request() {
+      try {
+        const response = await axios.get(
+          `http://192.168.66.168:5010/v1/users`,
+          {
+            headers: {
+              Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
+            },
+          }
+        );
+        this.users = response.data;
+        console.log(this.users);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async delete_ID() {
+      try {
+        const response = await axios.delete(
+          `http://192.168.66.168:5010/v1/users`,
+          {
+            params: {
+              user_id: 2
+            },
+            headers: {
+              Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
+            },
+          }
+        );
+        this.success = response.data.success;
+        console.log(this.success)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+  mounted() {
+    this.request();
+  },
 };
 </script>
 
@@ -33,7 +75,7 @@ export default {
               <td>index</td>
               <td>Codered</td>
               <td>
-                <button type="button" class="btn btn-outline-danger">
+                <button type="button" @click="delete_ID" class="btn btn-outline-danger">
                   Удалить
                 </button>
               </td>

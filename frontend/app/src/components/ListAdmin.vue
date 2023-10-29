@@ -7,7 +7,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    list_admin() {
+        
+    }
+  },
   mounted() {},
 };
 </script>

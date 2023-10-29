@@ -5,10 +5,31 @@ import axios from "axios";
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      organizations: []
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    async request() {
+      try {
+        const response = await axios.get(
+          `http://192.168.66.168:5010/v1/organizations`,
+          {
+            headers: {
+              Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
+            },
+          }
+        );
+        this.organizations = response.data;
+        console.log(this.organizations);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  mounted() {
+    this.request();
+  },
 };
 </script>
 
