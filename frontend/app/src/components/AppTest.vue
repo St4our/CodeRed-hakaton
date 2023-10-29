@@ -178,6 +178,7 @@ span {
   align-items: center;
   border-radius: 16px;
 }
+
 h1 {
   position: absolute;
   top: 10%;

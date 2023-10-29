@@ -46,7 +46,8 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <RouterLink to="/test">Перейти</RouterLink>
+
+          <RouterLink to="/menu/tests">Перейти</RouterLink>
         </div>
       </div>
     </div>
@@ -59,7 +60,7 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <RouterLink to="#">Перейти</RouterLink>
+          <RouterLink to="/menu/lesson">Перейти</RouterLink>
         </div>
       </div>
     </div>
@@ -72,7 +73,7 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <RouterLink to="/chat">Перейти</RouterLink>
+          <RouterLink to="/menu/chat">Перейти</RouterLink>
         </div>
       </div>
     </div>

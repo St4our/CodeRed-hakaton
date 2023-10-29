@@ -5,14 +5,24 @@ import ListOrganization from '../components/ListOrganization.vue'
 import ListAdmin from '../components/ListAdmin.vue'
 import ListUsers from '../components/ListUsers.vue'
 import CategoryUser from '../components/CategoryUser.vue'
+import AppTests from '../components/AppTests.vue'
+import TestCreate from '../create/TestCreate.vue'
 import AppMenu from '../components/AppMenu.vue'
 import AppProfile from '../components/AppProfile.vue'
+import AppMain from '../components/AppMain.vue'
 import AppChat from '../components/AppChat.vue'
 import AppTest from '../components/AppTest.vue'
+import AppLesson from '../components/AppLesson.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    {
+      path: '/',
+      name: 'main',
+      component: AppMain,
+      alias: "/"
+    },
     {
       path: '/registration',
       name: 'register',
@@ -24,12 +34,12 @@ const router = createRouter({
       component: AppLogin,
     },
     {
-      path: '/list/organization',
+      path: '/menu/list/organization',
       name: 'listorganization',
       component: ListOrganization,
     },
     {
-      path: '/list/admin',
+      path: '/menu/list/admin',
       name: 'listadmin',
       component: ListAdmin,
     },
@@ -47,22 +57,36 @@ const router = createRouter({
       path: '/menu',
       name: 'menu',
       component: AppMenu,
-      alias: "/"
     },
     {
-      path: '/chat',
+      path: '/menu/tests',
+      name: 'tests',
+      component: AppTests,
+    },
+    {
+      path: '/menu/test/create',
+      name: 'testcreate',
+      component: TestCreate,
+    },
+    {
+      path: '/menu/chat',
       name: 'chat',
       component: AppChat,
     },
     {
-      path: '/test',
+      path: '/menu/tests/test',
       name: 'test',
       component: AppTest,
     },
     {
-      path: '/profile',
+      path: '/menu/profile',
       name: 'profile',
       component: AppProfile,
+    },
+    {
+      path: '/menu/lesson',
+      name: 'lesson',
+      component: AppLesson,
     },
   ]
 })

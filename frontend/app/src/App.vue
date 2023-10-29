@@ -21,13 +21,13 @@ export default {
 <template>
   <div class="container1">
     <div class="author">
-      <span class="one">by</span> <span class="two">CodeRed</span> Team
+      <span class="one">by</span> <span class="two">CodeRed</span>
     </div>
     <div class="img">
       <RouterLink to="/">
         <img src="./assets/codered.png" class="codered" alt="codered-png" />
       </RouterLink>
-      <RouterLink to="/profile">
+      <RouterLink to="/menu/profile">
         <img src="./assets/profile.png" class="profile" alt="profile.png" />
       </RouterLink>
     </div>
@@ -90,12 +90,14 @@ export default {
   padding-left: 35px;
   padding-top: 20px;
   padding-right: 35px;
-  cursor: pointer;
   z-index: 2;
 }
 .codered {
   height: 110px;
   width: auto;
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
 }
 
 .profile {
@@ -114,12 +116,17 @@ a {
     width: auto;
   }
 
+  .profile {
+    height: 50px;
+  }
+
   .img {
     position: absolute;
     top: 0;
     left: 0;
     padding-left: 10px;
     padding-top: 10px;
+    padding-right: 10px;
   }
 }
 </style>
