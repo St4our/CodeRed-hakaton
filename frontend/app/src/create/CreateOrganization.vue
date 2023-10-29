@@ -21,30 +21,20 @@ export default {
   methods: {
     async submit() {
       try {
-        if (this.password && this.name) {
-          let response = await axios.post(
-            `/users`,
-            {
-              params: {
-                name: this.name,
-                surname: this.surname,
-                phone: this.phone,
-                email: this.email,
-                organization_id: this.organization_id,
-                category_id: this.category_id,
-                username: this.username,
-                password: this.password,
-                sec_role: this.sec_role,
-              },
+        let response = await axios.post(
+          `/organizations`,
+          {
+            params: {
+              name: this.name,
             },
-            {
-              headers: {
-                Authorization: document.cookie.replace(`token=`, ``),
-              },
-            }
-          );
-          console.log(response.data);
-        }
+          },
+          {
+            headers: {
+              Authorization: document.cookie.replace(`token=`, ``),
+            },
+          }
+        );
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -73,10 +63,6 @@ export default {
             <div class="input-box">
               <input type="text" v-model="name" required id="name" />
               <label for="" class="name">Название</label>
-            </div>
-            <div class="input-box">
-              <input type="text" v-model="inn" required id="inn" />
-              <label for="" class="surname">ИНН Организации</label>
             </div>
             <div class="sign-up">
               <button class="sign-up-btn" type="submit" id="sign-up">

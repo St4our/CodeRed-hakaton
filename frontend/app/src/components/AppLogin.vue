@@ -32,7 +32,6 @@ export default {
           document.cookie = new String();
           document.cookie = `token=${this.user.token}; max-age=2419200`;
           if (this.user.sec_role == "super") {
-            console.log("super");
             this.$router.push({ name: "supermenu" });
           } else if (this.user.sec_role == "admin") {
             console.log("admin");
@@ -41,7 +40,6 @@ export default {
             console.log("user");
             this.$router.push({ name: "menu" });
           }
-          this.$router.push({ name: "menu" });
         }
       } catch (error) {
         console.error(error);

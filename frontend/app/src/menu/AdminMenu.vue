@@ -33,7 +33,7 @@ export default {
       </div>
       <div class="face face2">
         <div class="content">
-          <RouterLink to="/menu/list/users/category">Перейти</RouterLink>
+          <RouterLink to="/adminmenu/list/users/category">Перейти</RouterLink>
         </div>
       </div>
     </div>

@@ -9,11 +9,11 @@ export default {
       name: "",
       surname: "",
       email: "",
-      organization_id: "1",
+      organization_id: '',
       category_id: "1",
       username: "",
       password: "",
-      sec_role: "sample_role",
+      sec_role: "admin",
       error: "",
       status: 0,
     };
@@ -60,7 +60,7 @@ export default {
     },
 
     get_id(){
-      this.category_id = this.$route.query.category_id
+      this.organization_id = this.$route.query.organization_id
     },
   },
   mounted() {
@@ -73,7 +73,7 @@ export default {
   <div class="container">
     <div class="image">
       <div class="form-box">
-        <h2 class="title">Регистрация</h2>
+        <h2 class="title">Создание Администратора</h2>
         <div class="form">
           <form ref="form" @submit.prevent="submit">
             <div class="input-box">
@@ -109,7 +109,7 @@ export default {
             </div>
             <div class="sign-up">
               <button class="sign-up-btn" type="submit" id="sign-up">
-                Зарегистрировать
+                Создать
               </button>
             </div>
           </form>
@@ -141,7 +141,7 @@ body {
 }
 
 .container {
-  position: relative;
+  position: absolute;
   width: 350px;
   height: 650px;
   background: rgba(0, 0, 0.75);
@@ -340,7 +340,7 @@ input:valid ~ label {
 }
 
 .title {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 @media (max-width: 700px) {

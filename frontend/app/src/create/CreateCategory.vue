@@ -21,30 +21,20 @@ export default {
   methods: {
     async submit() {
       try {
-        if (this.password && this.name) {
-          let response = await axios.post(
-            `/users`,
-            {
-              params: {
-                name: this.name,
-                surname: this.surname,
-                phone: this.phone,
-                email: this.email,
-                organization_id: this.organization_id,
-                category_id: this.category_id,
-                username: this.username,
-                password: this.password,
-                sec_role: this.sec_role,
-              },
+        let response = await axios.post(
+          `/categories`,
+          {
+            params: {
+              name: this.name,
             },
-            {
-              headers: {
-                Authorization: document.cookie.replace(`token=`, ``),
-              },
-            }
-          );
-          console.log(response.data);
-        }
+          },
+          {
+            headers: {
+              Authorization: document.cookie.replace(`token=`, ``),
+            },
+          }
+        );
+        console.log(response.data);
       } catch (error) {
         console.log(error);
       }

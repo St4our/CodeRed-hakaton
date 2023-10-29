@@ -13,15 +13,15 @@ export default {
     async request() {
       try {
         const response = await axios.get(
-          `http://192.168.66.168:5010/v1/categories`,
+          `/categories`,
           {
             headers: {
               Authorization: `YmF4OkJheHRpeW9yb3YyMTE3`,
             },
           }
         );
-        this.categories = response.data;
-        console.log(this.users);
+        this.categories = response.data.categories;
+        console.log(this.categories);
       } catch (error) {
         console.error(error);
       }
@@ -40,7 +40,7 @@ export default {
       <table class="table table-dark">
         <thead>
           <tr class="">
-            <th>Индекс</th>
+            <th>ID категории</th>
             <th>Категория</th>
             <th>Переход</th>
           </tr>
@@ -49,11 +49,11 @@ export default {
       <div class="scroll-table-body glass">
         <table>
           <tbody class="scroll-table-body glass" >
-            <tr v-for="(item, index) in this.categories" class="list-item">
-              <td>{{index + 1}}</td>
-              <td>{{item}}</td>
+            <tr v-for="item in this.categories" class="list-item">
+              <td>{{ item.category_id }}</td>
+              <td>{{item.name}}</td>
               <td>
-                <RouterLink to="/adminmenu/list/users/category/users" class="btn btn-outline-light transition"
+                <RouterLink :to="'/adminmenu/list/users/category/users?category_id='+String(item.category_id)" class="btn btn-outline-light transition"
                   >Перейти</RouterLink
                 >
               </td>
@@ -98,7 +98,7 @@ tbody a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 35px;
 }
 .btn-outline-danger,
