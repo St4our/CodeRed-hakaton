@@ -20,7 +20,7 @@ export default {
             },
           }
         );
-        this.organizations = response.data;
+        this.organizations = response.data.organizations;
         console.log(this.organizations);
       } catch (error) {
         console.error(error);
@@ -40,8 +40,8 @@ export default {
       <table class="table table-dark">
         <thead>
           <tr class="">
-            <th>Индекс</th>
-            <th>Категория</th>
+            <th>ID Организации</th>
+            <th>Название</th>
             <th>Переход</th>
           </tr>
         </thead>
@@ -49,11 +49,11 @@ export default {
       <div class="scroll-table-body glass">
         <table>
           <tbody class="scroll-table-body glass" >
-            <tr v-for="(item, index) in this.organizations" class="list-item">
-              <td>{{index + 1}}</td>
-              <td>{{item}}</td>
+            <tr v-for="item in this.organizations" class="list-item">
+              <td>{{item.organization_id}}</td>
+              <td>{{item.name}}</td>
               <td>
-                <RouterLink to="#" class="btn btn-outline-light transition"
+                <RouterLink :to="'/supermenu/list/organization/admin?organization_id='+String(item.organization_id)" class="btn btn-outline-light transition"
                   >Перейти</RouterLink
                 >
               </td>

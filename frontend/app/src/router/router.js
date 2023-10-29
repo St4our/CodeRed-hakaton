@@ -21,6 +21,7 @@ import AppProfile from '../components/AppProfile.vue';
 import AppLesson from '../components/AppLesson.vue';
 import AppLessons from '../components/AppLessons.vue';
 import LessonCreate from '../create/LessonCreate.vue';
+import CreateAdmin from '../create/CreateAdmin.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,7 +48,7 @@ const router = createRouter({
       component: ListOrganization,
     },
     {
-      path: '/menu/list/admin',
+      path: '/supermenu/list/organization/admin',
       name: 'listadmin',
       component: ListAdmin,
     },
@@ -137,6 +138,11 @@ const router = createRouter({
       path: '/adminmenu/list/users/category/create',
       name: 'createcategory',
       component: CreateCategory,
+    },
+    {
+      path: '/supermenu/list/admin/create',
+      name: 'createadmin',
+      component: CreateAdmin,
     },
   ],
 });

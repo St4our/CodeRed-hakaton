@@ -7,6 +7,8 @@ export default {
   data() {
     return {
       users: [],
+      users_sort: [],
+      category_id: '',
       success: ''
     };
   },
@@ -22,10 +24,20 @@ export default {
           }
         );
         this.users = response.data;
-        console.log(this.users);
+        for (let i = 0; i < this.users.users.length; i++) {
+          let user = this.users.users[i]
+          console.log(user)
+          if (user.category_id == this.category_id) {
+            this.users_sort.push(user)
+          }
+        }
       } catch (error) {
         console.error(error);
       }
+    },
+
+    get_id(){
+      this.category_id = this.$route.query.category_id
     },
 
     async delete_ID() {
@@ -49,6 +61,7 @@ export default {
     }
   },
   mounted() {
+    this.get_id()
     this.request();
   },
 };
@@ -61,21 +74,22 @@ export default {
       <table class="table table-dark">
         <thead>
           <tr class="">
-            <th>Индекс</th>
-            <th>Категория</th>
-            <th>Переход</th>
+            <th>ID пользователя</th>
+            <th>Никнейм</th>
+            <th>Почта</th>
           </tr>
         </thead>
       </table>
       <div class="scroll-table-body glass">
         <table>
           <tbody class="scroll-table-body glass" >
-            <tr v-for="(item, index) in this.users" class="list-item">
-              <td>{{index + 1}}</td>
-              <td>{{item}}</td>
+            <tr v-for="item in this.users_sort" class="list-item">
+              <td>{{item.user_id}}</td>
+              <td>{{item.username}}</td>
+              <td>{{item.email}}</td>
               <td>
-                <RouterLink to="/adminmenu/list/users/category/users" class="btn btn-outline-light transition"
-                  >Перейти</RouterLink
+                <RouterLink to="/adminmenu/list/users/category/users" class="btn btn-outline-danger transition"
+                  >Удалить</RouterLink
                 >
               </td>
             </tr>
@@ -84,7 +98,7 @@ export default {
       </div>
     </div>
     <div class="create">
-      <RouterLink class="btn btn-outline-success" to="/adminmenu/list/users/category/create">Создать</RouterLink>
+      <RouterLink class="btn btn-outline-success" :to="'/registration?category_id='+String(category_id)">Создать</RouterLink>
     </div>
   </div>
 </template>
@@ -101,7 +115,7 @@ a {
   text-decoration: none;
 }
 tbody a {
-  color: #fff;
+  color: red;
 }
 .glass {
     border-radius: 16px !important;
